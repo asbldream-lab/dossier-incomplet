@@ -37,3 +37,7 @@ façon Expedition 33 (menu d'attaques + parade en temps réel). Noms d'attaques 
 ## Vérif rapide sans éditeur
 `~/Downloads/Godot.app/Contents/MacOS/Godot --headless --path . --import` puis
 `... --headless --path . --quit-after 600 res://scenes/battle.tscn` (erreurs dans la sortie).
+
+## Git / GitHub
+Repo privé : https://github.com/asbldream-lab/dossier-incomplet (branche `main`).
+Workflow : une petite étape = un commit clair en français, puis `git push`. Fichiers `.godot/` ignorés.
