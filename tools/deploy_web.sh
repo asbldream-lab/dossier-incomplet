@@ -9,6 +9,6 @@ touch build/web/.nojekyll
 cd build/web
 rm -rf .git && git init -q -b gh-pages && git add -A
 git commit -q -m "Version web $(date '+%Y-%m-%d %H:%M')"
-git push -q -f https://github.com/asbldream-lab/dossier-incomplet.git gh-pages
+git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 push -q -f https://github.com/asbldream-lab/dossier-incomplet.git gh-pages
 rm -rf .git
 echo "Publié : https://asbldream-lab.github.io/dossier-incomplet/"
