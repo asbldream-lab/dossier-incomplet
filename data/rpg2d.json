@@ -1,0 +1,70 @@
+{
+	"map": [
+		"########################",
+		"#T...L....######.......#",
+		"#.........######...L...#",
+		"#..cccc...P####P.......#",
+		"#.................cc...#",
+		"#S.cccc...........cc...D",
+		"#.........N............#",
+		"#..L......######...L...#",
+		"#.........######.......#",
+		"########################"
+	],
+	"texts": {
+		"intro": ["Préfecture. 8h47.", "La file d'attente commence dehors… et ne finit jamais vraiment.", "(ZQSD/flèches : marcher — Espace/Entrée : interagir)"],
+		"ticket_take": ["Vous prenez un ticket.", "Votre numéro : 847.", "L'écran affiche : N° 004."],
+		"ticket_again": ["Vous avez déjà un ticket. Il est toujours 847.", "L'écran, lui, affiche toujours 004."],
+		"door_locked": ["Une affichette sur la porte :", "« BUREAU 3 — Accès réservé aux usagers munis d'un ticket. »"],
+		"door_open": ["L'écran grésille… et affiche enfin : 847.", "Vous poussez la porte du Bureau 3…"],
+		"npc": ["Un homme assis, un dossier serré contre lui :", "« Ça fait trois heures que j'attends. »", "« On m'a demandé un justificatif… du justificatif. »", "« Et surtout… ne la regardez pas dans les lunettes. »"],
+		"posters": {
+			"10,3": ["« TOUT DOSSIER INCOMPLET NE SERA PAS TRAITÉ »", "En dessous, quelqu'un a gratté : « tous les dossiers sont incomplets »."],
+			"15,3": ["« Temps d'attente estimé : 6 mois. »", "« Merci de votre patience. »"]
+		}
+	},
+	"player": {"hp": 100, "patience": 100},
+	"items": [
+		{"id": "cafe", "name": "Café de la machine", "desc": "Tiède. Rend 30 PV.", "count": 2, "hp": 30},
+		{"id": "respire", "name": "Respirer profondément", "desc": "Rend 35 de Patience.", "count": 2, "patience": 35}
+	],
+	"skills": [
+		{"name": "Coup de poing", "desc": "Un coup simple.", "cost": 0, "dmg": 10, "acc": 1.0, "hits": 1},
+		{"name": "J'ai tous mes documents !", "desc": "Plus précis. Coûte 10 de Patience.", "cost": 10, "dmg": 18, "acc": 1.15, "hits": 1},
+		{"name": "Photocopies certifiées conformes", "desc": "3 coups de 7. Coûte 15 de Patience.", "cost": 15, "dmg": 7, "acc": 1.0, "hits": 3},
+		{"name": "Je connais mes droits !", "desc": "Énorme, mais imprécis. Coûte 25 de Patience.", "cost": 25, "dmg": 35, "acc": 0.8, "hits": 1}
+	],
+	"boss": {
+		"name": "Mme Bertrand",
+		"title": "Agent d'accueil — Bureau 3",
+		"layers": {
+			"base": "res://assets/2d/secretaire_base.svg",
+			"bras_tampon": "res://assets/2d/secretaire_arm_stamp.svg",
+			"bras_telephone": "res://assets/2d/secretaire_arm_phone.svg",
+			"fx": "res://assets/2d/secretaire_fx.svg"
+		},
+		"intro": ["Elle ne lève pas les yeux.", "« Bonjour. Vous avez rendez-vous ? »"],
+		"parts": [
+			{"id": "tete", "name": "Tête", "hp": 40, "hit": 0.45, "rect": [225, 95, 155, 235], "fatal": true,
+				"break": "Ses lunettes tombent. Derrière… rien. Elle s'effondre sur le dossier."},
+			{"id": "bras_tampon", "name": "Bras au tampon", "hp": 45, "hit": 0.75, "rect": [95, 30, 150, 440],
+				"break": "Le tampon « REFUSÉ » lui glisse des doigts et roule sous le bureau."},
+			{"id": "bras_telephone", "name": "Bras au téléphone", "hp": 35, "hit": 0.8, "rect": [380, 460, 150, 210],
+				"break": "Le combiné raccroche tout seul. Plus personne pour « le service informatique »."},
+			{"id": "torse", "name": "Torse", "hp": 120, "hit": 0.95, "rect": [170, 420, 270, 230], "fatal": true,
+				"break": "Elle s'affaisse sur sa chaise, épuisée. « …Bon. Je prends votre dossier. »"}
+		],
+		"attacks": [
+			{"name": "« Vous n'avez pas le dossier complet »", "dmg": 14, "text": "Elle vous frappe avec le dossier. Fort."},
+			{"name": "« Il manque une photocopie »", "dmg": 10, "patience": 8, "text": "Une pluie de feuilles vous coupe les doigts."},
+			{"name": "« Revenez lundi »", "dmg": 4, "patience": 18, "text": "Vous sentez votre semaine disparaître."},
+			{"name": "« Ce n'est pas le bon guichet »", "dmg": 12, "patience": 6, "text": "Elle vous repousse d'un coup de chaise à roulettes."},
+			{"name": "TAMPON « REFUSÉ » !", "needs": "bras_tampon", "dmg": 24, "text": "Le tampon s'abat sur votre front. L'encre brûle."},
+			{"name": "« Le système est en panne »", "needs": "bras_telephone", "patience": 25, "text": "Elle décroche. Une tonalité infinie vous vide la tête."}
+		],
+		"flee_ok": ["PILE : vous reprenez un ticket et ressortez à reculons.", "Elle n'a même pas remarqué votre départ."],
+		"flee_ko": ["FACE : la porte est bloquée par la file d'attente."],
+		"victory": ["DOSSIER DÉPOSÉ", "Étape 1 validée : récépissé de dépôt obtenu."],
+		"defeat": ["DOSSIER REFUSÉ", "Motif : vous avez été découragé(e)."]
+	}
+}

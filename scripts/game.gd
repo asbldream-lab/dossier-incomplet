@@ -12,6 +12,8 @@ const LOOPS := ["Crouch_Fwd", "Crouch_Idle", "Dance", "Driving", "Idle", "Idle_T
 	"Idle_TalkingPhone", "NinjaJump_Idle", "Slide", "TreeChopping", "Walk_Carry", "Zombie_Idle", "Zombie_Walk_Fwd", "Sword_Idle"]
 
 var data: Dictionary = {}
+var data2d: Dictionary = {} # 2D RPG version (data/rpg2d.json)
+var has_ticket := false
 var current_boss := "secretaire"
 var _lib: AnimationLibrary
 
@@ -20,6 +22,7 @@ func _ready() -> void:
 	_setup_inputs()
 	var f := FileAccess.open("res://data/combat.json", FileAccess.READ)
 	data = JSON.parse_string(f.get_as_text())
+	data2d = JSON.parse_string(FileAccess.get_file_as_string("res://data/rpg2d.json"))
 
 
 func _setup_inputs() -> void:
@@ -27,6 +30,7 @@ func _setup_inputs() -> void:
 	var keys := {
 		"up": [KEY_W, KEY_UP], "down": [KEY_S, KEY_DOWN], "left": [KEY_A, KEY_LEFT], "right": [KEY_D, KEY_RIGHT],
 		"attack": [KEY_J], "dodge": [KEY_SPACE], "parry": [KEY_SPACE],
+		"interact": [KEY_SPACE, KEY_ENTER, KEY_KP_ENTER, KEY_E], "cancel": [KEY_ESCAPE, KEY_BACKSPACE],
 	}
 	for action in keys:
 		if not InputMap.has_action(action):
@@ -235,6 +239,10 @@ func ui_bar(c: Color, width := 320.0) -> ProgressBar:
 func go_battle(boss_id: String) -> void:
 	current_boss = boss_id
 	get_tree().change_scene_to_file("res://scenes/battle.tscn")
+
+
+func go_explore() -> void:
+	get_tree().change_scene_to_file("res://scenes/explore.tscn")
 
 
 func go_level1() -> void:

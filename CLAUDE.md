@@ -11,7 +11,17 @@ façon Expedition 33 (menu d'attaques + parade en temps réel). Noms d'attaques 
 - Contenu (stats, attaques, textes, boss) dans `data/combat.json`, pas dans le code.
 - Réutiliser `battle.gd` pour tous les boss (ajouter un boss = une entrée dans `bosses`).
 
-## Architecture (scènes construites en code, .tscn minimales)
+## VERSION 2D (principale, depuis 2026-11-10) — style « Fear & Hunger » (mécaniques seulement, art original)
+- Scène principale `scenes/explore.tscn` (`scripts/2d/explore.gd`) : préfecture vue de dessus, déplacement case par case,
+  carte ASCII + textes dans `data/rpg2d.json`. Ticket (T) requis pour ouvrir la porte du Bureau 3 (D) → apparition secrétaire → combat.
+- `scenes/battle2d.tscn` (`scripts/2d/battle2d.gd`) : combat statique, personne ne bouge. Attaquer → compétence → partie du corps visée
+  (chance %), parties cassables (bras = retire des attaques, tête/torse = victoire), Patience (coût des compétences, à 0 : -30 % précision),
+  objets, fuite pile ou face. Coups = tremblement + flash.
+- `scripts/2d/fx.gd` (helpers, shader grain/vignette), `scripts/2d/dialogue.gd` (boîte de texte).
+- Portrait : `assets/2d/secretaire.svg` (dessiné en SVG) découpé en calques par `python3 -I tools/split_portrait.py assets/2d/secretaire.svg`
+  (marqueurs de commentaires RIGHT ARM / LEFT ARM / desk / atmosphere). Relancer après toute modif du SVG.
+
+## Architecture version 3D (ancienne, gardée de côté)
 - `scripts/game.gd` — autoload `Game` : inputs (touches physiques, ZQSD en AZERTY), librairie d'animations
   fusionnée UAL1+UAL2, chargement JSON, helpers (box, label3d, float_text, build_room, ui_label, ui_bar), changements de scène.
 - `scripts/character_model.gd` — `CharacterModel` : mannequin GLB + AnimationPlayer partagé. `play`, `play_once` (retourne la durée), `idle`, `attach(bone)`.
