@@ -41,3 +41,5 @@ façon Expedition 33 (menu d'attaques + parade en temps réel). Noms d'attaques 
 ## Git / GitHub
 Repo privé : https://github.com/asbldream-lab/dossier-incomplet (branche `main`).
 Workflow : une petite étape = un commit clair en français, puis `git push`. Fichiers `.godot/` ignorés.
+Repo public. Version jouable : https://asbldream-lab.github.io/dossier-incomplet/ — republier après chaque étape avec `./tools/deploy_web.sh`
+(export web, renderer Compatibility, branche `gh-pages`).
