@@ -101,7 +101,13 @@ func _process(d: float) -> void:
 		var target := grid + dir
 		if not SOLID.contains(_tile(target)):
 			_step(target)
-	elif Input.is_action_just_pressed("interact"):
+
+
+## Interact via events (not polling): the key press that closes a dialogue is consumed by the box,
+## so it can't instantly re-open the same conversation.
+func _unhandled_input(e: InputEvent) -> void:
+	if e.is_action_pressed("interact") and not e.is_echo() and not (moving or locked or box.busy):
+		get_viewport().set_input_as_handled()
 		_interact(grid + facing)
 
 
