@@ -1,0 +1,45 @@
+{
+	"monsters": {
+		"agrafeuse": {"name": "Agrafeuse géante", "hp": 60, "speed": 2.6, "dmg": 12, "reach": 1.7},
+		"classeur": {"name": "Classeur à levier", "hp": 90, "speed": 1.7, "dmg": 15, "reach": 1.6},
+		"dossier": {"name": "Dossier incomplet", "hp": 35, "speed": 3.8, "dmg": 8, "reach": 1.5},
+		"tampon": {"name": "Tampon REFUSÉ", "hp": 70, "speed": 2.2, "dmg": 18, "reach": 2.4}
+	},
+	"player": {
+		"hp": 100,
+		"ap_start": 2,
+		"ap_max": 6,
+		"counter": {"name": "Contre-attaque : « C'est écrit sur votre site ! »", "anim": "Punch_Cross", "hit": 0.45, "dmg": 15},
+		"attacks": [
+			{"name": "J'ai tous mes documents !", "desc": "Coup simple. Rapporte +1 PA.", "cost": 0, "gain": 1,
+				"moves": [{"anim": "Punch_Jab", "hits": [0.45], "dmg": 12}]},
+			{"name": "Photocopies certifiées conformes", "desc": "Combo de 3 coups de poing.", "cost": 2,
+				"moves": [{"anim": "Punch_Jab", "hits": [0.45], "dmg": 9}, {"anim": "Punch_Cross", "hits": [0.45], "dmg": 9}, {"anim": "Punch_Jab", "hits": [0.45], "dmg": 9}]},
+			{"name": "Justificatif de domicile de moins de 3 mois", "desc": "Direct + crochet lourd.", "cost": 3,
+				"moves": [{"anim": "Punch_Cross", "hits": [0.45], "dmg": 18}, {"anim": "Melee_Hook", "hits": [0.5], "dmg": 22}]},
+			{"name": "Je connais mes droits !", "desc": "Enchaînement complet : jab, direct, crochet dévastateur.", "cost": 4,
+				"moves": [{"anim": "Punch_Jab", "hits": [0.45], "dmg": 10}, {"anim": "Punch_Cross", "hits": [0.45], "dmg": 12}, {"anim": "Melee_Hook", "hits": [0.5], "dmg": 30}]},
+			{"name": "Prendre un ticket", "desc": "Patienter dans la file… Récupère 30 PV.", "cost": 1, "heal": 30, "anim": "Consume"}
+		]
+	},
+	"bosses": {
+		"secretaire": {
+			"name": "Mme Bertrand — Agent d'accueil",
+			"hp": 180,
+			"intro": "« Bonjour. Vous avez rendez-vous ? »",
+			"phase2": "« Bon… je vais chercher ma responsable. »\nElle revient encore plus agacée !",
+			"victory": "DOSSIER DÉPOSÉ !\nÉtape 1 validée : récépissé de dépôt obtenu.",
+			"defeat": "DOSSIER REFUSÉ\nMotif : vous avez été découragé(e).",
+			"attacks": [
+				{"name": "« Vous n'avez pas le dossier complet »", "moves": [{"anim": "Melee_Hook", "hits": [0.5], "dmg": 14}]},
+				{"name": "« Il manque une photocopie »", "moves": [{"anim": "Sword_Regular_Combo", "hits": [0.25, 0.5, 0.78], "dmg": 6}]},
+				{"name": "« Ce n'est pas le bon guichet »", "knockback": true, "moves": [{"anim": "Sword_Dash", "hits": [0.45], "dmg": 16}]},
+				{"name": "« Revenez lundi »", "ranged": true, "ap_drain": 2, "moves": [{"anim": "OverhandThrow", "hits": [0.55], "dmg": 8}]},
+				{"name": "« Le système est en panne »", "ranged": true, "stun": true, "moves": [{"anim": "Spell_Simple_Shoot", "hits": [0.4], "dmg": 6}]}
+			],
+			"phase2_attacks": [
+				{"name": "TAMPON « REFUSÉ » !", "knockback": true, "moves": [{"anim": "Sword_Heavy_Combo", "hits": [0.35, 0.7], "dmg": 14}]}
+			]
+		}
+	}
+}

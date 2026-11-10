@@ -1,0 +1,6 @@
+# Godot
+.godot/
+*.tmp
+export/
+build/
+.DS_Store
