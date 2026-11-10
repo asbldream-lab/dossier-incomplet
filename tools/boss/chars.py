@@ -125,3 +125,4 @@ person({"skin": "#c9b095", "coat": "#8a6f8f", "pants": "#4a4038", "shoes": "#2a2
 person({"skin": "#a5805e", "coat": "#6b3d2a", "pants": "#2e3b4e", "shoes": "#d9d2b8", "hair": hair_etu}, sit=True, extra=x_etu); save("etudiant")
 person({"skin": "#c2a184", "coat": "#5c5a52", "shirt": "#c8c0a6", "pants": "#33312c", "shoes": "#15130f", "hair": hair_homme}, extra=x_homme); save("homme")
 print("ok", len(os.listdir(DST)))
+person(PLAYER, "back", 0, extra=x_player); save("player_battle", 8)  # big back view for the battle screen

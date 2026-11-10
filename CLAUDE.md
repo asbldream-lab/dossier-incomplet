@@ -1,25 +1,31 @@
 # Dossier Incomplet — jeu Godot 4.5
 
 Jeu satirique : obtenir ses papiers en préfecture. Chaque niveau = une étape administrative.
-Chaque niveau : phase action temps réel (monstres-fournitures) → boss en combat tour par tour
-façon Expedition 33 (menu d'attaques + parade en temps réel). Noms d'attaques drôles, mais
-**chaque attaque est un vrai coup animé** (l'attaquant court vers la cible, frappe, la cible encaisse, il revient).
+RPG 2D : chaque niveau = salle d'attente (exploration, PNJ) puis boss au guichet en combat façon Pokémon.
+Tout (mots, objets, règles) doit faire ressentir la difficulté d'obtenir ses papiers.
 
 ## Règles de travail (économie de tokens)
 - Avancer par petites étapes ; l'utilisateur teste dans Godot et décrit le problème en une phrase.
 - Pas de captures d'écran ni de lecture de gros logs sauf nécessité ; ne lire que les fichiers concernés.
-- Contenu (stats, attaques, textes, boss) dans `data/combat.json`, pas dans le code.
-- Réutiliser `battle.gd` pour tous les boss (ajouter un boss = une entrée dans `bosses`).
+- Contenu (chiffres, attaques, textes) dans `data/rpg2d.json`, pas dans le code.
 
-## VERSION 2D (principale, depuis 2026-11-10) — style « Fear & Hunger » (mécaniques seulement, art original)
-- Scène principale `scenes/explore.tscn` (`scripts/2d/explore.gd`) : préfecture vue de dessus, déplacement case par case,
-  carte ASCII + textes dans `data/rpg2d.json`. Ticket (T) requis pour ouvrir la porte du Bureau 3 (D) → apparition secrétaire → combat.
-- `scenes/battle2d.tscn` (`scripts/2d/battle2d.gd`) : combat statique, personne ne bouge. Attaquer → compétence → partie du corps visée
-  (chance %), parties cassables (bras = retire des attaques, tête/torse = victoire), Patience (coût des compétences, à 0 : -30 % précision),
-  objets, fuite pile ou face. Coups = tremblement + flash.
-- `scripts/2d/fx.gd` (helpers, shader grain/vignette), `scripts/2d/dialogue.gd` (boîte de texte).
-- Portrait : `assets/2d/secretaire.svg` (dessiné en SVG) découpé en calques par `python3 -I tools/split_portrait.py assets/2d/secretaire.svg`
-  (marqueurs de commentaires RIGHT ARM / LEFT ARM / desk / atmosphere). Relancer après toute modif du SVG.
+## VERSION 2D (principale)
+- `scripts/game.gd` — autoload `Game` : inputs, état de la partie (`has_ticket, called, clock, talked, inv, skipped, checkpoint`), `data2d` (JSON).
+- **Salle d'attente** `scenes/explore.tscn` (`scripts/2d/explore.gd`) : décor `assets/2d/salle.svg` (généré par `tools/boss/room.py`),
+  persos `assets/2d/chars/*.svg` (générés par `tools/boss/chars.py`). Prendre un ticket (847), parler aux 3 PNJ (chacun donne un objet et
+  fait avancer l'horloge), le 847 est sauté → réclamer à la porte du Bureau 3 → combat.
+- **Combat** `scenes/battle2d.tscn` (`scripts/2d/battle2d.gd`), tout est dans la clé `battle` du JSON :
+  - Jauge DOSSIER (35 % → 100 % = victoire), PATIENCE (0 = on craque), horloge (12h00 = guichet fermé). Chaque action coûte des minutes.
+  - Menu en bas à droite : ATTAQUE (`moves`), DÉFENSE (`defenses` : rester poli / garder le dossier en main), OBJETS (`items`), FUIR.
+  - Elle : attaques du `pool`, exigences (`demands` → statuts STYLO BLEU / PIÈCE MANQUANTE / TIMBRE EXIGÉ, soignés par les objets des PNJ),
+    coups annoncés un tour avant (`tampon` aux tours `stamp_turns`, `egare` une fois) à parer avec DÉFENSE.
+  - Fins `texts.end` : win / crack / closed / flee ; « Retenter le guichet » recharge le combat depuis `Game.checkpoint`.
+- `scripts/2d/fx.gd` (helpers, shader grain/vignette), `scripts/2d/dialogue.gd` (boîte de texte de l'exploration).
+- Tests (lancer en arrière-plan avec sortie dans un fichier ; `load()` et non `preload` du script de combat dans un script `-s`) :
+  - `godot --headless -s tools/test_explore.gd` : joue toute la salle d'attente jusqu'au combat.
+  - `godot --headless -s tools/test_battle.gd -- 300` : équilibrage (prudent ≈ 70 % de victoires, hasard ≈ 12 %, spam d'une attaque 0 %).
+  - `godot -s tools/test_battle_ui.gd -- /dossier` : partie complète au clavier simulé + captures (vraie fenêtre).
+  - `godot -s tools/test_battle_ends.gd -- /dossier` : défaites, boutons de fin, fuite à la souris (vraie fenêtre).
 
 ## Architecture version 3D (ancienne, gardée de côté)
 - `scripts/game.gd` — autoload `Game` : inputs (touches physiques, ZQSD en AZERTY), librairie d'animations
@@ -46,12 +52,12 @@ façon Expedition 33 (menu d'attaques + parade en temps réel). Noms d'attaques 
 
 ## Vérif rapide sans éditeur
 `~/Downloads/Godot.app/Contents/MacOS/Godot --headless --path . --import` puis
-`... --headless --path . --quit-after 600 res://scenes/battle.tscn` (erreurs dans la sortie).
+les tests ci-dessus (erreurs dans la sortie).
 
 ## Git / GitHub
-Repo privé : https://github.com/asbldream-lab/dossier-incomplet (branche `main`).
+Repo public : https://github.com/asbldream-lab/dossier-incomplet (branche `main`).
 Workflow : une petite étape = un commit clair en français, puis `git push`. Fichiers `.godot/` ignorés.
-Repo public. Version jouable : https://asbldream-lab.github.io/dossier-incomplet/ — republier après chaque étape avec `./tools/deploy_web.sh`
+Version jouable : https://asbldream-lab.github.io/dossier-incomplet/ — republier après chaque étape avec `./tools/deploy_web.sh`
 (export web, renderer Compatibility, branche `gh-pages`).
 
 ## Portrait du boss (redessiné)

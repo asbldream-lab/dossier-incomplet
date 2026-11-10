@@ -21,6 +21,7 @@ var talked := {}       # npc id -> true
 var inv := {}          # item id -> count
 var skipped := false   # our number was skipped: the door can be opened
 var coffee_taken := false
+var checkpoint := {}   # state at the start of the battle (clock, inv), to retry it
 var current_boss := "secretaire"
 var _lib: AnimationLibrary
 
