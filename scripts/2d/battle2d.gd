@@ -38,6 +38,8 @@ func _ready() -> void:
 	for p in B.parts:
 		parts[p.id] = {"def": p, "hp": float(p.hp), "broken": false}
 	items = Game.data2d.items.duplicate(true)
+	for it in items:
+		it.count = int(Game.inv.get(it.id, 0))
 	_build()
 	Fx.overlay(self)
 	_refresh()
@@ -424,7 +426,7 @@ func _end(lines: Array, c: Color) -> void:
 	var b := Fx.button("Recommencer")
 	b.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	b.pressed.connect(func():
-		Game.has_ticket = false
+		Game.reset_run()
 		Game.go_explore())
 	v.add_child(b)
 	b.grab_focus()

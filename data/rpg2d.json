@@ -1,38 +1,173 @@
 {
 	"map": [
-		"########################",
-		"#T...L....######.......#",
-		"#.........######...L...#",
-		"#..cccc...P####P.......#",
-		"#.................cc...#",
-		"#S.cccc...........cc...D",
-		"#.........N............#",
-		"#..L......######...L...#",
-		"#.........######.......#",
-		"########################"
+		"####################",
+		"##A#E##A###H###D#A##",
+		"#T..........MX.....#",
+		"#..................#",
+		"#..cc2c...ccc1.....#",
+		"#..................#",
+		"#..cccc...cccc...F.#",
+		"#.........3........#",
+		"#S.................#",
+		"#..................#",
+		"####################"
 	],
 	"texts": {
-		"intro": ["Préfecture. 8h47.", "La file d'attente commence dehors… et ne finit jamais vraiment.", "(ZQSD/flèches : marcher — Espace/Entrée : interagir)"],
-		"ticket_take": ["Vous prenez un ticket.", "Votre numéro : 847.", "L'écran affiche : N° 004."],
-		"ticket_again": ["Vous avez déjà un ticket. Il est toujours 847.", "L'écran, lui, affiche toujours 004."],
-		"door_locked": ["Une affichette sur la porte :", "« BUREAU 3 — Accès réservé aux usagers munis d'un ticket. »"],
-		"door_open": ["L'écran grésille… et affiche enfin : 847.", "Vous poussez la porte du Bureau 3…"],
-		"npc": ["Un homme assis, un dossier serré contre lui :", "« Ça fait trois heures que j'attends. »", "« On m'a demandé un justificatif… du justificatif. »", "« Et surtout… ne la regardez pas dans les lunettes. »"],
+		"intro": [
+			"Préfecture. 8h47.",
+			"Vous venez déposer votre dossier de titre de séjour.",
+			"Première épreuve : la salle d'attente.",
+			"(Flèches ou ZQSD : marcher — Espace : parler, examiner)"
+		],
+		"ticket_take": [
+			"Vous appuyez sur « TITRES DE SÉJOUR ».",
+			"La machine réfléchit. Longtemps.",
+			"▶ Ticket n° 847.",
+			"L'écran affiche : n° 844. Ça va… c'est presque à vous. Non ?"
+		],
+		"ticket_again": [
+			"« Un seul ticket par usager. »",
+			"Le vôtre : 847."
+		],
+		"need_ticket": [
+			"Prenez d'abord un ticket à la borne. Sans ticket, vous n'existez pas."
+		],
+		"ding": [
+			"DING !  « Numéro %d — Guichet 3. »"
+		],
+		"skipped": [
+			"DING !  « Numéro 848 — Guichet 3. »",
+			"… 848 ?",
+			"Le 847 n'a jamais été appelé. Votre numéro vient d'être sauté.",
+			"Il va falloir aller réclamer à la porte du Bureau 3."
+		],
+		"screen": [
+			"Écran d'appel : « N° %d — Guichet 3 ».",
+			"Votre ticket : 847."
+		],
+		"clock": [
+			"Il est %s.",
+			"Une affichette : « Fermeture des guichets à 12h00. »"
+		],
+		"door_no_ticket": [
+			"BUREAU 3.",
+			"« Accès réservé aux usagers munis d'un ticket. »"
+		],
+		"door_wait": [
+			"BUREAU 3. Une voix, derrière la porte :",
+			"« On vous appellera. »",
+			"(En attendant, parlez aux autres usagers.)"
+		],
+		"door_open": [
+			"Vous frappez.",
+			"« C'est pour quoi ? »",
+			"« J'ai le 847. Vous avez appelé le 848… »",
+			"« Le 847 a été appelé. Vous n'étiez pas là. »",
+			"« J'étais LÀ. »",
+			"« … »",
+			"« Bon. Entrez. Mais on ferme à midi. »"
+		],
+		"coffee_first": [
+			"Machine à café. « HORS SERVICE ».",
+			"Vous mettez une pièce quand même. L'espoir fait vivre.",
+			"Elle avale la pièce… hésite… et lâche un gobelet.",
+			"▶ Vous obtenez : CAFÉ TIÈDE."
+		],
+		"coffee": [
+			"« HORS SERVICE ». Cette fois, elle garde la pièce."
+		],
+		"copier": [
+			"Photocopieuse en libre-service.",
+			"« EN PANNE. Adressez-vous au tabac d'en face. »",
+			"Le tabac d'en face est fermé le matin."
+		],
+		"ficus": [
+			"Un ficus. Lui aussi attend depuis longtemps.",
+			"Il a visiblement abandonné."
+		],
+		"chair": [
+			"Chaise en plastique, vissée au sol.",
+			"Vous restez debout. Par principe."
+		],
 		"posters": {
-			"10,3": ["« TOUT DOSSIER INCOMPLET NE SERA PAS TRAITÉ »", "En dessous, quelqu'un a gratté : « tous les dossiers sont incomplets »."],
-			"15,3": ["« Temps d'attente estimé : 6 mois. »", "« Merci de votre patience. »"]
+			"2,1": [
+				"« TOUT DOSSIER INCOMPLET NE SERA PAS TRAITÉ »",
+				"Dessous, gratté au stylo : « tous les dossiers sont incomplets »."
+			],
+			"7,1": [
+				"« Gagnez du temps : prenez rendez-vous en ligne ! »",
+				"(Aucun créneau disponible. Réessayez à minuit.)"
+			],
+			"17,1": [
+				"« Temps d'attente estimé : 6 mois. »",
+				"« Merci de votre patience. »"
+			]
 		}
 	},
-	"player": {"hp": 100, "patience": 100},
+	"player": {
+		"hp": 100,
+		"patience": 100
+	},
 	"items": [
-		{"id": "cafe", "name": "Café de la machine", "desc": "Tiède. Rend 30 PV.", "count": 2, "hp": 30},
-		{"id": "respire", "name": "Respirer profondément", "desc": "Rend 35 de Patience.", "count": 2, "patience": 35}
+		{
+			"id": "cafe",
+			"name": "Café tiède",
+			"desc": "Rend 30 PV.",
+			"count": 0,
+			"hp": 30
+		},
+		{
+			"id": "photocopie",
+			"name": "Photocopie de secours",
+			"desc": "(utile au guichet)",
+			"count": 0
+		},
+		{
+			"id": "stylo",
+			"name": "Stylo noir",
+			"desc": "(utile au guichet)",
+			"count": 0
+		},
+		{
+			"id": "timbre",
+			"name": "Timbre fiscal",
+			"desc": "(utile au guichet)",
+			"count": 0
+		}
 	],
 	"skills": [
-		{"name": "Coup de poing", "desc": "Un coup simple.", "cost": 0, "dmg": 10, "acc": 1.0, "hits": 1},
-		{"name": "J'ai tous mes documents !", "desc": "Plus précis. Coûte 10 de Patience.", "cost": 10, "dmg": 18, "acc": 1.15, "hits": 1},
-		{"name": "Photocopies certifiées conformes", "desc": "3 coups de 7. Coûte 15 de Patience.", "cost": 15, "dmg": 7, "acc": 1.0, "hits": 3},
-		{"name": "Je connais mes droits !", "desc": "Énorme, mais imprécis. Coûte 25 de Patience.", "cost": 25, "dmg": 35, "acc": 0.8, "hits": 1}
+		{
+			"name": "Coup de poing",
+			"desc": "Un coup simple.",
+			"cost": 0,
+			"dmg": 10,
+			"acc": 1.0,
+			"hits": 1
+		},
+		{
+			"name": "J'ai tous mes documents !",
+			"desc": "Plus précis. Coûte 10 de Patience.",
+			"cost": 10,
+			"dmg": 18,
+			"acc": 1.15,
+			"hits": 1
+		},
+		{
+			"name": "Photocopies certifiées conformes",
+			"desc": "3 coups de 7. Coûte 15 de Patience.",
+			"cost": 15,
+			"dmg": 7,
+			"acc": 1.0,
+			"hits": 3
+		},
+		{
+			"name": "Je connais mes droits !",
+			"desc": "Énorme, mais imprécis. Coûte 25 de Patience.",
+			"cost": 25,
+			"dmg": 35,
+			"acc": 0.8,
+			"hits": 1
+		}
 	],
 	"boss": {
 		"name": "Mme Bertrand",
@@ -43,28 +178,176 @@
 			"bras_telephone": "res://assets/2d/secretaire_arm_phone.svg",
 			"fx": "res://assets/2d/secretaire_fx.svg"
 		},
-		"intro": ["Elle ne lève pas les yeux.", "« Bonjour. Vous avez rendez-vous ? »"],
+		"intro": [
+			"Elle ne lève pas les yeux.",
+			"« Bonjour. Vous avez rendez-vous ? »"
+		],
 		"parts": [
-			{"id": "tete", "name": "Tête", "hp": 40, "hit": 0.45, "rect": [200, 150, 190, 270], "fatal": true,
-				"break": "Ses lunettes tombent. Derrière… rien. Elle s'effondre sur le dossier."},
-			{"id": "bras_tampon", "name": "Bras au tampon", "hp": 45, "hit": 0.75, "rect": [15, 260, 190, 390],
-				"break": "Le tampon « REFUSÉ » lui glisse des doigts et roule sous le bureau."},
-			{"id": "bras_telephone", "name": "Bras au téléphone", "hp": 35, "hit": 0.8, "rect": [290, 640, 250, 110],
-				"break": "Le combiné raccroche tout seul. Plus personne pour « le service informatique »."},
-			{"id": "torse", "name": "Torse", "hp": 120, "hit": 0.95, "rect": [190, 480, 230, 165], "fatal": true,
-				"break": "Elle s'affaisse sur sa chaise, épuisée. « …Bon. Je prends votre dossier. »"}
+			{
+				"id": "tete",
+				"name": "Tête",
+				"hp": 40,
+				"hit": 0.45,
+				"rect": [
+					200,
+					150,
+					190,
+					270
+				],
+				"fatal": true,
+				"break": "Ses lunettes tombent. Derrière… rien. Elle s'effondre sur le dossier."
+			},
+			{
+				"id": "bras_tampon",
+				"name": "Bras au tampon",
+				"hp": 45,
+				"hit": 0.75,
+				"rect": [
+					15,
+					260,
+					190,
+					390
+				],
+				"break": "Le tampon « REFUSÉ » lui glisse des doigts et roule sous le bureau."
+			},
+			{
+				"id": "bras_telephone",
+				"name": "Bras au téléphone",
+				"hp": 35,
+				"hit": 0.8,
+				"rect": [
+					290,
+					640,
+					250,
+					110
+				],
+				"break": "Le combiné raccroche tout seul. Plus personne pour « le service informatique »."
+			},
+			{
+				"id": "torse",
+				"name": "Torse",
+				"hp": 120,
+				"hit": 0.95,
+				"rect": [
+					190,
+					480,
+					230,
+					165
+				],
+				"fatal": true,
+				"break": "Elle s'affaisse sur sa chaise, épuisée. « …Bon. Je prends votre dossier. »"
+			}
 		],
 		"attacks": [
-			{"name": "« Vous n'avez pas le dossier complet »", "dmg": 14, "text": "Elle vous frappe avec le dossier. Fort."},
-			{"name": "« Il manque une photocopie »", "dmg": 10, "patience": 8, "text": "Une pluie de feuilles vous coupe les doigts."},
-			{"name": "« Revenez lundi »", "dmg": 4, "patience": 18, "text": "Vous sentez votre semaine disparaître."},
-			{"name": "« Ce n'est pas le bon guichet »", "dmg": 12, "patience": 6, "text": "Elle vous repousse d'un coup de chaise à roulettes."},
-			{"name": "TAMPON « REFUSÉ » !", "needs": "bras_tampon", "dmg": 24, "text": "Le tampon s'abat sur votre front. L'encre brûle."},
-			{"name": "« Le système est en panne »", "needs": "bras_telephone", "patience": 25, "text": "Elle décroche. Une tonalité infinie vous vide la tête."}
+			{
+				"name": "« Vous n'avez pas le dossier complet »",
+				"dmg": 14,
+				"text": "Elle vous frappe avec le dossier. Fort."
+			},
+			{
+				"name": "« Il manque une photocopie »",
+				"dmg": 10,
+				"patience": 8,
+				"text": "Une pluie de feuilles vous coupe les doigts."
+			},
+			{
+				"name": "« Revenez lundi »",
+				"dmg": 4,
+				"patience": 18,
+				"text": "Vous sentez votre semaine disparaître."
+			},
+			{
+				"name": "« Ce n'est pas le bon guichet »",
+				"dmg": 12,
+				"patience": 6,
+				"text": "Elle vous repousse d'un coup de chaise à roulettes."
+			},
+			{
+				"name": "TAMPON « REFUSÉ » !",
+				"needs": "bras_tampon",
+				"dmg": 24,
+				"text": "Le tampon s'abat sur votre front. L'encre brûle."
+			},
+			{
+				"name": "« Le système est en panne »",
+				"needs": "bras_telephone",
+				"patience": 25,
+				"text": "Elle décroche. Une tonalité infinie vous vide la tête."
+			}
 		],
-		"flee_ok": ["PILE : vous reprenez un ticket et ressortez à reculons.", "Elle n'a même pas remarqué votre départ."],
-		"flee_ko": ["FACE : la porte est bloquée par la file d'attente."],
-		"victory": ["DOSSIER DÉPOSÉ", "Étape 1 validée : récépissé de dépôt obtenu."],
-		"defeat": ["DOSSIER REFUSÉ", "Motif : vous avez été découragé(e)."]
-	}
+		"flee_ok": [
+			"PILE : vous reprenez un ticket et ressortez à reculons.",
+			"Elle n'a même pas remarqué votre départ."
+		],
+		"flee_ko": [
+			"FACE : la porte est bloquée par la file d'attente."
+		],
+		"victory": [
+			"DOSSIER DÉPOSÉ",
+			"Étape 1 validée : récépissé de dépôt obtenu."
+		],
+		"defeat": [
+			"DOSSIER REFUSÉ",
+			"Motif : vous avez été découragé(e)."
+		]
+	},
+	"ticket": 847,
+	"clock_start": 527,
+	"npcs": {
+		"1": {
+			"name": "L'étudiant",
+			"sprite": "etudiant",
+			"item": "photocopie",
+			"minutes": 45,
+			"talk": [
+				"Un étudiant cerné, enseveli sous les chemises cartonnées.",
+				"« Quatrième fois que je viens. »",
+				"« La première, il manquait une photocopie. La deuxième, la photocopie n'était “pas assez lisible”. »",
+				"« La troisième, ils avaient changé le formulaire la veille. »",
+				"« Tiens, prends ça. J'en ai fait douze. Au cas où. »",
+				"▶ Vous obtenez : PHOTOCOPIE DE SECOURS."
+			],
+			"again": [
+				"« Tu as vérifié que tes photocopies sont en A4 ? Pas en A4 “à peu près”. En A4. »"
+			]
+		},
+		"2": {
+			"name": "La dame au tricot",
+			"sprite": "mamie",
+			"item": "stylo",
+			"minutes": 45,
+			"talk": [
+				"Une vieille dame tricote. L'écharpe fait déjà trois mètres.",
+				"« Je l'ai commencée en arrivant, ce matin. »",
+				"« Trente ans que je renouvelle mon titre. Trente ans qu'il manque quelque chose. »",
+				"« Un conseil, mon petit : stylo NOIR. Le bleu, elle le refuse. »",
+				"▶ Vous obtenez : STYLO NOIR."
+			],
+			"again": [
+				"« Noir, le stylo. Et on ne dépasse pas des cases. »"
+			]
+		},
+		"3": {
+			"name": "L'homme au dossier",
+			"sprite": "homme",
+			"item": "timbre",
+			"minutes": 45,
+			"talk": [
+				"Un homme debout, un dossier serré contre lui.",
+				"« On m'a demandé un justificatif de domicile. »",
+				"« Puis un justificatif… du justificatif. »",
+				"« J'ai acheté un timbre fiscal en trop. 225 euros. Prenez-le. Moi, j'abandonne. »",
+				"▶ Vous obtenez : TIMBRE FISCAL.",
+				"« Et surtout… ne la regardez pas dans les lunettes. »"
+			],
+			"again": [
+				"« Je reviendrai lundi. On revient toujours lundi. »"
+			]
+		}
+	},
+	"goals": [
+		"Prendre un ticket à la borne",
+		"Attendre son tour… (parler aux autres usagers)",
+		"Réclamer à la porte du Bureau 3"
+	]
 }

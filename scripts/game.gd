@@ -14,6 +14,13 @@ const LOOPS := ["Crouch_Fwd", "Crouch_Idle", "Dance", "Driving", "Idle", "Idle_T
 var data: Dictionary = {}
 var data2d: Dictionary = {} # 2D RPG version (data/rpg2d.json)
 var has_ticket := false
+## Waiting-room run state (reset by reset_run)
+var called := 844      # number shown on the call screen
+var clock := 527       # minutes since midnight (8h47)
+var talked := {}       # npc id -> true
+var inv := {}          # item id -> count
+var skipped := false   # our number was skipped: the door can be opened
+var coffee_taken := false
 var current_boss := "secretaire"
 var _lib: AnimationLibrary
 
@@ -23,6 +30,7 @@ func _ready() -> void:
 	var f := FileAccess.open("res://data/combat.json", FileAccess.READ)
 	data = JSON.parse_string(f.get_as_text())
 	data2d = JSON.parse_string(FileAccess.get_file_as_string("res://data/rpg2d.json"))
+	reset_run()
 
 
 func _setup_inputs() -> void:
@@ -247,3 +255,21 @@ func go_explore() -> void:
 
 func go_level1() -> void:
 	get_tree().change_scene_to_file("res://scenes/level1.tscn")
+
+
+func reset_run() -> void:
+	has_ticket = false
+	called = 844
+	clock = int(data2d.clock_start)
+	talked = {}
+	inv = {}
+	skipped = false
+	coffee_taken = false
+
+
+func give(id: String, n := 1) -> void:
+	inv[id] = int(inv.get(id, 0)) + n
+
+
+func clock_text() -> String:
+	return "%dh%02d" % [clock / 60, clock % 60]

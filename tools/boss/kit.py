@@ -56,9 +56,11 @@ def line(pts, stroke=INK, sw=1.5, op=1, j=0.6, sketch=1, clips=None, hard=False)
         s += f'<path d="{poly(p, False) if hard else smooth(p)}" fill="none" stroke="{stroke}" stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round" opacity="{op}"/>'
     out.append(_wrap(s, clips))
 
-def hatch(clips, angle, gap, stroke=INK, sw=0.9, op=0.5, box=(0, 0, 600, 800), wob=1.2, seg=(14, 55)):
+BOX = [0, 0, 600, 800]
+
+def hatch(clips, angle, gap, stroke=INK, sw=0.9, op=0.5, box=None, wob=1.2, seg=(14, 55)):
     """Broken, slightly shaky parallel strokes clipped to every path in `clips`."""
-    x0, y0, x1, y1 = box
+    x0, y0, x1, y1 = box or BOX
     cx, cy, r = (x0 + x1) / 2, (y0 + y1) / 2, math.hypot(x1 - x0, y1 - y0) / 2
     ca, sa = math.cos(math.radians(angle)), math.sin(math.radians(angle))
     d, t = "", -r
@@ -94,7 +96,7 @@ _F = {
  "C": [[(4,1),(3,0),(1,0),(0,1),(0,5),(1,6),(3,6),(4,5)]], "D": [[(0,0),(0,6),(2,6),(4,4),(4,2),(2,0),(0,0)]],
  "E": [[(4,0),(0,0),(0,6),(4,6)],[(0,3),(3,3)]], "F": [[(4,0),(0,0),(0,6)],[(0,3),(3,3)]],
  "G": [[(4,1),(3,0),(1,0),(0,1),(0,5),(1,6),(3,6),(4,5),(4,3),(2,3)]], "H": [[(0,0),(0,6)],[(4,0),(4,6)],[(0,3),(4,3)]],
- "I": [[(2,0),(2,6)]], "L": [[(0,0),(0,6),(4,6)]], "M": [[(0,6),(0,0),(2,3),(4,0),(4,6)]], "N": [[(0,6),(0,0),(4,6),(4,0)]],
+ "I": [[(2,0),(2,6)]], "K": [[(0,0),(0,6)],[(4,0),(0,3),(4,6)]], "L": [[(0,0),(0,6),(4,6)]], "M": [[(0,6),(0,0),(2,3),(4,0),(4,6)]], "N": [[(0,6),(0,0),(4,6),(4,0)]],
  "O": [[(1,0),(3,0),(4,1),(4,5),(3,6),(1,6),(0,5),(0,1),(1,0)]], "P": [[(0,6),(0,0),(3,0),(4,1),(4,2),(3,3),(0,3)]],
  "R": [[(0,6),(0,0),(3,0),(4,1),(4,2),(3,3),(0,3)],[(2,3),(4,6)]],
  "S": [[(4,1),(3,0),(1,0),(0,1),(0,2),(1,3),(3,3),(4,4),(4,5),(3,6),(1,6),(0,5)]], "T": [[(0,0),(4,0)],[(2,0),(2,6)]],
@@ -116,5 +118,5 @@ def text(s, x, y, h, stroke=INK, sw=1.6, op=1, angle=0, track=5.6, j=0.25):
             d += "M" + "L".join("%.1f %.1f" % (x + (i * track + px) * k + R.uniform(-j, j), y + py * k + R.uniform(-j, j)) for px, py in st)
     out.append(f'<path transform="rotate({angle} {x} {y})" d="{d}" fill="none" stroke="{stroke}" stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round" opacity="{op}"/>')
 
-def svg(w=600, h=800):
-    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">\n<defs>{"".join(defs)}</defs>\n' + "\n".join(out) + "\n</svg>\n"
+def svg(w=600, h=800, scale=1):
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w * scale}" height="{h * scale}">\n<defs>{"".join(defs)}</defs>\n' + "\n".join(out) + "\n</svg>\n"
