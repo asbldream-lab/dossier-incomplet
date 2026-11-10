@@ -6,7 +6,7 @@ src = sys.argv[1]
 s = open(src, encoding="utf-8").read()
 head = s[:s.index("</defs>") + len("</defs>")]
 body = s[len(head):s.rindex("</svg>")]
-M = {"arm_stamp": ("<!-- RIGHT ARM", "<!-- LEFT ARM"), "arm_phone": ("<!-- LEFT ARM", "<!-- desk -->"), "fx": ("<!-- atmosphere -->", None)}
+M = {"arm_stamp": ("<!-- RIGHT ARM", "<!-- LEFT ARM"), "arm_phone": ("<!-- LEFT ARM", "<!-- atmosphere -->"), "fx": ("<!-- atmosphere -->", None)}
 parts = {}
 base = body
 for name, (a, b) in M.items():

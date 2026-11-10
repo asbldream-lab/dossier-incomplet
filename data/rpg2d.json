@@ -45,13 +45,13 @@
 		},
 		"intro": ["Elle ne lève pas les yeux.", "« Bonjour. Vous avez rendez-vous ? »"],
 		"parts": [
-			{"id": "tete", "name": "Tête", "hp": 40, "hit": 0.45, "rect": [225, 95, 155, 235], "fatal": true,
+			{"id": "tete", "name": "Tête", "hp": 40, "hit": 0.45, "rect": [200, 150, 190, 270], "fatal": true,
 				"break": "Ses lunettes tombent. Derrière… rien. Elle s'effondre sur le dossier."},
-			{"id": "bras_tampon", "name": "Bras au tampon", "hp": 45, "hit": 0.75, "rect": [95, 30, 150, 440],
+			{"id": "bras_tampon", "name": "Bras au tampon", "hp": 45, "hit": 0.75, "rect": [15, 260, 190, 390],
 				"break": "Le tampon « REFUSÉ » lui glisse des doigts et roule sous le bureau."},
-			{"id": "bras_telephone", "name": "Bras au téléphone", "hp": 35, "hit": 0.8, "rect": [380, 460, 150, 210],
+			{"id": "bras_telephone", "name": "Bras au téléphone", "hp": 35, "hit": 0.8, "rect": [290, 640, 250, 110],
 				"break": "Le combiné raccroche tout seul. Plus personne pour « le service informatique »."},
-			{"id": "torse", "name": "Torse", "hp": 120, "hit": 0.95, "rect": [170, 420, 270, 230], "fatal": true,
+			{"id": "torse", "name": "Torse", "hp": 120, "hit": 0.95, "rect": [190, 480, 230, 165], "fatal": true,
 				"break": "Elle s'affaisse sur sa chaise, épuisée. « …Bon. Je prends votre dossier. »"}
 		],
 		"attacks": [

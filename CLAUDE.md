@@ -53,3 +53,7 @@ Repo privé : https://github.com/asbldream-lab/dossier-incomplet (branche `main`
 Workflow : une petite étape = un commit clair en français, puis `git push`. Fichiers `.godot/` ignorés.
 Repo public. Version jouable : https://asbldream-lab.github.io/dossier-incomplet/ — republier après chaque étape avec `./tools/deploy_web.sh`
 (export web, renderer Compatibility, branche `gh-pages`).
+
+## Portrait du boss (redessiné)
+- Généré par `python3 tools/boss/build.py` (kit.py = traits encrés tremblés, hachures, lettrage ; bg/body/head/desk/arms/fx = une partie chacun) → `assets/2d/secretaire.svg`, puis `python3 -I tools/split_portrait.py assets/2d/secretaire.svg` pour les calques.
+- Aperçu fidèle au rendu Godot : `godot --headless -s tools/render_svg.gd -- in.svg out.png` (pas de filtres ni de `<text>` : le rasteriseur ne les gère pas).
